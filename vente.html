@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Master</title>
+
+    <!--Styles-->
+    <link rel="stylesheet" href="css/vente.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+<body>
+  <header>
+    <button id="toggle-btn"><i class="fas fa-bars"></i></button>
+    <h1><i class="fas fa-box"></i> Tableau de bord</h1>
+    <i class=""></i>
+
+  </header>
+     <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <a href="dashboard.html"><i class="fas fa-home"></i> Tableau de bord</a>
+        <a href="product.html"><i class="fas fa-box"></i> Produits</a>
+        <a href="vente.html"><i class="fas fa-cart-shopping"></i> Achat / Vente</a>
+        <a href="settings.html"><i class="fas fa-cog"></i> Paramètres</a>
+    </div>
+    <!-- cette page servira a affiché un pannier qui affichera les produit selectionné et il y aura un autre section avec une bare de recherche pour rechercher parmis les different produit et pouvoir les selectionner-->
+     <section id="cart-selection">
+        <div class="cart-config">
+            <!--cette div affiche les produit ajouter au pannier-->
+            <div class="cartheader">
+                <div class="title-action">
+                    <h1>Pannier</h1>
+                    <!-- action pour le pannier-->
+                    <div class="action">
+                        <button><span>Supprimer</span></button>
+                        <button><span>Paiement</span></button>
+                    </div>
+                </div>
+                <div class="cart-info">
+                    <div>
+                        <span class="cartinfo">item selectionner: <span id="qty">0</span></span>
+                        <span class="cartinfo">prix du pannier: <span id="price">0€</span></span>
+                    </div>
+                </div>
+                <hr style="color: ghostwhite;">
+            </div>
+            <div class="cart-items">
+                <!-- affiche la lsite de produit-->
+                <span>Aucun produit selectionner</span>
+                <!-- exemple de product-item-list -->
+                <div class="product-item-list">
+                    <div class="product-item">
+                        <span class="product-name">nom du produit</span>
+                        <span class="product-ref">ref: erp578fe</span>
+                        <span class="product-quantity">quantité: 0</span>
+                        <span class="product-price">prix: 0€</span>
+                        <!-- icon pour enlever de la liste-->
+                        <i class="fas fa-trash-alt remove-item"></i>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="select-item">
+            <div class="select-item-header">
+                <h1>Selection</h1>
+                <input type="text" id="search-bar" placeholder="Rechercher un produit...">
+            </div>
+            <div class="select-item-list">
+                <span>Aucun produit dans la base de donnée</span>
+            </div>
+        </div>
+     </section>
+     <!-- import sidebar.js from the underfolder in api/sidebar.js-->
+    <script src="js-script/sidebar.js"></script>
+</body>
+</html>

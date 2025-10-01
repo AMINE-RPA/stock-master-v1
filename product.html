@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion Produits</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pie-chart.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    /* Onglets */
+    .tabs { display: flex; gap: 5px; margin: 10px 0; justify-content: center; }
+    .tab-btn { padding: 8px 15px; border: none; background: #ddd; cursor: pointer; border-radius: 5px; font-weight: 600; }
+    .tab-btn.active { background: #3498db; color: #fff; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Formulaire catégorie */
+    #category-manager form { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    #category-manager input[type="text"] { flex: 1; padding: 5px; }
+    #category-manager input[type="color"] { width: 50px; height: 32px; border: none; }
+    #category-list li { display: flex; gap: 10px; align-items: center; margin-bottom: 5px; }
+    .category-box { padding: 2px 8px;  color: #fff; display: inline-block; }
+
+    /* Modals */
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 999; }
+    .modal-content { background: #fff; padding: 20px; border-radius: 8px; width: 400px; max-width: 90%; position: relative; }
+    .modal.hidden { display: none; }
+    .close { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 20px; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
+
+    /* Popup sélection */
+    .popup { position: fixed; bottom: 15px; right: 15px; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 500; }
+    .popup.hidden { display: none; }
+
+    /* Cards */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px; }
+    .card { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; }
+    .othercardcontent { padding: 10px; }
+    .product-div { display: flex; justify-content: space-between; align-items: center; }
+    .category-box { padding: 2px 8px; color: #fff; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <button id="toggle-btn"><i class="fas fa-bars"></i></button>
+    <h1><i class="fas fa-box"></i> Mes Produits</h1>
+    <i class=""></i>
+  </header>
+  
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <h2>Menu</h2>
+    <a href="dashboard.html"><i class="fas fa-home"></i> Tableau de bord</a>
+    <a href="product.html"><i class="fas fa-box"></i> Produits</a>
+    <a href="vente.html"><i class="fas fa-cart-shopping"></i> Achat / Vente</a>
+    <a href="settings.html"><i class="fas fa-cog"></i> Paramètres</a>
+  </aside>
+
+  <!-- Onglets -->
+  <div class="tabs">
+    <button class="tab-btn active" data-target="product-tab">Produits</button>
+    <button class="tab-btn" data-target="category-tab">Catégories</button>
+  </div>
+  <hr style="width: 80%;">
+
+  <div class="content">
+    <div class="tab-content">
+      <!-- Onglet Produits -->
+      <div id="product-tab" class="tab-panel active">
+        <div id="product-list" class="grid"></div>
+        <a href="#" id="openModal" class="btn-add" style="position: fixed; bottom: 15px; right: 15px; border-radius: 25px; padding-block: 12px;"><i class="fas fa-plus"></i></a>
+      </div>
+
+      <!-- Onglet Catégories -->
+      <div id="category-tab" class="tab-panel">
+        <section id="category-manager">
+          <h2>Gestion des catégories</h2>
+          <form id="add-category-form">
+            <input type="text" id="new-cat-name" placeholder="Nom de la catégorie" required>
+            <input type="color" id="new-cat-color" value="#3498db">
+            <button type="submit" class="btn">Ajouter</button>
+          </form>
+          <ul id="category-list"></ul>
+        </section>
+      </div>
+    </div>
+
+    <!-- Popup sélection -->
+    <div id="selection-popup" class="popup hidden">
+      <h3><i class="fas fa-check"></i> Sélection</h3>
+      <ul id="selection-list"></ul>
+    </div>
+
+    <!-- Modal édition produit -->
+    <div id="edit-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Modifier Produit</h2>
+        <form id="edit-form">
+          <input type="text" id="edit-name" placeholder="Nom" required><br>
+          <select id="edit-category" required></select><br>
+          <input type="text" id="edit-ref" placeholder="Référence" required><br>
+          <input type="number" id="edit-price" placeholder="Prix" required><br>
+          <input type="number" id="edit-quantity" placeholder="Quantité" required><br>
+          <input type="file" id="edit-photo"><br>
+          <img id="edit-previewImage" src="https://via.placeholder.com/250x150" style="width:100%;border-radius:8px;"><br><br>
+          <div class="modal-actions">
+            <button type="submit" id="save-edit" class="btn">Enregistrer</button>
+            <button type="button" id="cancel-edit" class="btn-secondary">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal ajout produit -->
+    <div id="productModal" class="modal hidden">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2>Ajouter un produit</h2>
+
+        <!-- Aperçu -->
+        <div id="preview" class="card">
+          <img id="previewImage" src="https://via.placeholder.com/250x150" style="width:100%;border-radius:8px;"><br>
+        </div>
+
+        <!-- Formulaire -->
+        <form id="productForm">
+          <input type="text" id="name" placeholder="Nom du produit" required><br>
+          <input type="text" id="ref" placeholder="Référence" required><br>
+          <select id="cat" required></select><br>
+          <input type="number" id="price" placeholder="Prix (€)" required><br>
+          <input type="number" id="qty" placeholder="Quantité" required><br>
+          <input type="file" id="photo"><br><br>
+          <button type="submit" class="btn">Valider</button>
+          <button type="button" id="cancel" class="btn-secondary">Annuler</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js-script/sidebar.js"></script>
+  <script src="js-script/render.js"></script>
+  <script src="js-script/action.js"></script>
+</body>
+</html>

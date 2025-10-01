@@ -1,0 +1,44 @@
+/* ========================
+   DASHBOARD
+   ======================== */
+.product-section {
+  width: 65%;
+}
+
+.shop-section {
+  width: 330px;
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+
+/* Tablette */
+@media (max-width: 992px) {
+  .product-section {
+    width: 100%;
+  }
+
+  .shop-section {
+    width: 80%;
+    margin: 20px auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .product-section {
+    width: 100%;
+  }
+
+  .shop-section {
+    width: 100%;
+    min-height: auto;
+    margin: 15px 0;
+  }
+}

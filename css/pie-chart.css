@@ -1,0 +1,150 @@
+/* ========================
+   CONTAINERS & LAYOUT
+   ======================== */
+.stock-widget {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px;
+  width: fit-content;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 15px rgb(0 0 0 / 20%);
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.container {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: #fff;
+}
+
+/* ========================
+   TITRES & TEXTES
+   ======================== */
+.stock-widget h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* ========================
+   PIE CHART
+   ======================== */
+#stockChart {
+  width: 240px;
+  height: 240px;
+}
+
+#pie-chart-info {
+  height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ========================
+   LÉGENDE
+   ======================== */
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+}
+
+.color.red    { background: #e74c3c; }
+.color.orange { background: #f39c12; }
+.color.green  { background: #2ecc71; }
+
+/* ========================
+   STOCK LIST ITEMS
+   ======================== */
+.stock-item {
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.stock-item.out {
+  background: #ffcccc;   /* rouge clair */
+}
+
+.stock-item.low {
+  background: #fff3cd;   /* jaune clair */
+}
+
+.stock-item.available {
+  background: #d4edda;   /* vert clair */
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+
+/* Tablette */
+@media (max-width: 992px) {
+  .stock-widget {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  #stockChart {
+    width: 200px;
+    height: 200px;
+  }
+
+  .legend {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .stock-widget {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  #stockChart {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  #pie-chart-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .legend {
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .legend-item {
+    justify-content: center;
+  }
+}

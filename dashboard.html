@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion Produits</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pie-chart.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Lien  pour Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+  <header>
+    <button id="toggle-btn"><i class="fas fa-bars"></i></button>
+    <h1><i class="fas fa-box"></i> Tableau de bord</h1>
+    <i class="fa fa-cog"></i>
+
+  </header>
+  
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>      Menu</h2>
+    <a href="dashboard.html"><i class="fas fa-home"></i> Tableau de bord</a>
+    <a href="product.html"><i class="fas fa-box"></i> Produits</a>
+    <a href="vente.html"><i class="fas fa-cart-shopping"></i> Achat / Vente</a>
+    <a href="settings.html"><i class="fas fa-cog"></i> Paramètres</a>
+  </div>
+
+  <div class="content">
+
+    <div class="container shop-section">
+      <h1>Commande</h1>
+      <hr style="width: 90%;">
+      <!--une liste qui affiche les differente commande a realiser-->
+      <div class="shop-list">
+        <div-command-item>
+          <span>pas de commande recente</span>
+          <i class="fa fas-shop"></i>
+        </div-command-item>
+      </div>
+    </div>
+
+    <div class="container product-section">
+      <!--Widget qui affiche un diagmra sur la quantité de produit dans le stock-->
+      <div class="stock-widget">
+        <div id="pie-chart-info">
+          <h1>État du Stock</h1>
+          <p id="total-products">Nombre de produits <br> total : 0</p>
+          <div class="legend">
+            <span class="legend-item"><span class="color red"></span> Hors stock</span>
+            <span class="legend-item"><span class="color orange"></span> Faible stock</span>
+            <span class="legend-item"><span class="color green"></span> Disponible en stock</span>
+          </div>
+        </div>
+        <div class="pieChart"><canvas id="stockChart"></canvas></div>
+      </div>
+      <!--Affiche ma liste de produit selon la quantité selectionné-->
+      <hr>
+      <div id="product-list" class="grid"></div>
+    </div>
+
+  </div>
+  
+
+  <!-- Import Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!--My own js files-->
+  <script src="js-script/pie-chart-script-stock.js"></script>
+  <script src="js-script/sidebar.js"></script>
+  <script src="js-script/add-edit-product.js"></script>
+</body>
+</html>
