@@ -245,6 +245,18 @@ header h1 {
   .sidebar {
     width: 180px;
   }
+  .content{
+     padding: 0px;
+     border-radius: 0px;
+     gap: 0px;
+  }
+
+   .container1{
+      background-color: #fff;
+   }
+   .container2{
+      background-color: none;
+   }
 }
 
 /* ========================
@@ -372,4 +384,5 @@ header h1 {
 #preview {
   margin-bottom: 20px;
 }
+
 
